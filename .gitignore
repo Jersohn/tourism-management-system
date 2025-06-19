@@ -1,0 +1,11 @@
+/node_modules/
+/vendor/
+/fonts/
+/assets/libs/
+/.vscode/
+.env
+*.log
+*.cache
+.DS_Store
+/composer.lock
+/composer.phar
