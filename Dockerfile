@@ -1,8 +1,8 @@
 FROM php:5.6-apache
 
 # Install git and required dependencies
-RUN apt-get update && apt-get install -y openssl zip unzip git
-    && docker-php-ext-install mbsting mysqli pdo pdo_mysql 
+RUN apt-get update && apt-get install -y openssl zip unzip git \
+    && docker-php-ext-install mbstring mysqli pdo pdo_mysql
 
 # Enable Apache rewrite module
 RUN a2enmod rewrite
