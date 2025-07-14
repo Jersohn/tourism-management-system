@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        - GITHUB_REPO=jersohn/tourism-management-system
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html  # Sync local changes (remove in production)
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+
+  db:
+    image: mariadb:10.4
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=tms
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+      - ./database.sql:/docker-entrypoint-initdb.d/init.sql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=
